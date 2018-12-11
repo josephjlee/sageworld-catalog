@@ -18,6 +18,10 @@ module SageWorld
       @response.message
     end
 
+    def error_message
+      as_hash[SageWorld::Constants::ROOT_KEY][:err_msg]
+    end
+
     def header
       @response.header
     end

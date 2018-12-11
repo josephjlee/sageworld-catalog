@@ -7,7 +7,7 @@ module SageWorld
         SageWorld::ResponseHandler.new(response)
       end
 
-      def self.list_builder(params)
+      private_class_method def self.list_builder(params)
         {
           supplier_list: params
         }

@@ -15,6 +15,13 @@ module SageWorld
         SageWorld::ResponseHandler.new(response)
       end
 
+      def self.search(keyword, options = {})
+        options[:quick_search] = keyword
+        params = DEFAULT_SEARCH_PARAMS.merge(options)
+        response = SageWorld::Client.new(search_product_params(params)).send_request
+        SageWorld::ResponseHandler.new(response)
+      end
+
       private def find_product_params(product_id, options)
         {
           product_detail: {
@@ -23,14 +30,7 @@ module SageWorld
         }.merge(options)
       end
 
-      def self.search(keyword, options = {})
-        params[:quick_search] = keyword
-        params = DEFAULT_SEARCH_PARAMS.merge(options)
-        response = SageWorld::Client.new(search_product_params(params)).send_request
-        SageWorld::ResponseHandler.new(response)
-      end
-
-      def self.search_product_params(params)
+      private_class_method def self.search_product_params(params)
         {
           search: params
         }
