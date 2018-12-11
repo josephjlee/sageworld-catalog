@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
 
-  spec.add_dependency 'gyoku', '~> 1.0'
+  spec.add_dependency 'gyoku',    '~> 1.0'
   spec.add_dependency 'nokogiri', '>= 1.5.9'
-  spec.add_dependency 'nori', '~> 2.6'
+  spec.add_dependency 'nori',     '~> 2.6'
 end
