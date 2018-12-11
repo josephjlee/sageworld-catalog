@@ -4,7 +4,7 @@ require 'nokogiri'
 module SageWorld
   class ResponseHandler
 
-    attr_reader :response
+    attr_reader :response, :data_hash
 
     def initialize(response)
       @response = response
@@ -19,7 +19,8 @@ module SageWorld
     end
 
     def error_message
-      as_hash[SageWorld::Constants::ROOT_KEY][:err_msg]
+      @data_hash ||= as_hash
+      @data_hash.dig(SageWorld::Constants::ROOT_KEY, :err_msg)
     end
 
     def header
@@ -32,7 +33,7 @@ module SageWorld
 
     def as_hash
       parser = Nori.new(:convert_tags_to => lambda { |tag| tag.snakecase.to_sym })
-      parser.parse(@response.body)
+      @data_hash ||= parser.parse(@response.body)
     end
 
   end
