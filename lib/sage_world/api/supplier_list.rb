@@ -3,8 +3,13 @@ module SageWorld
     class SupplierList < SageWorld::Api::Base
 
       def self.get(params = {})
-        response = SageWorld::Client.new(list_builder(params)).send_request
-        SageWorld::ResponseHandler.new(response)
+        if @existing_params == params
+          @response
+        else
+          @existing_params = params
+          response = SageWorld::Client.new(list_builder(params)).send_request
+          @response = SageWorld::ResponseHandler.new(response)
+        end
       end
 
       private_class_method def self.list_builder(params)

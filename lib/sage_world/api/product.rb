@@ -11,8 +11,13 @@ module SageWorld
       end
 
       def details(options = {})
-        response = SageWorld::Client.new(find_product_params(@product_id ,options)).send_request
-        SageWorld::ResponseHandler.new(response)
+        if @existing_options == options
+          @response
+        else
+          @existing_options = options
+          response = SageWorld::Client.new(find_product_params(@product_id ,options)).send_request
+          @response = SageWorld::ResponseHandler.new(response)
+        end
       end
 
       def self.search(keyword, options = {})
