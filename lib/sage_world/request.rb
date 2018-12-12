@@ -1,5 +1,6 @@
 require 'uri'
 require 'net/http'
+require 'gyoku'
 
 module SageWorld
   class Request

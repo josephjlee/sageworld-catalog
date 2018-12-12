@@ -4,6 +4,8 @@ require 'nokogiri'
 module SageWorld
   class ResponseHandler
 
+    include SageWorld::Api::FindHelper
+
     attr_reader :response, :data_hash
 
     def initialize(response)
