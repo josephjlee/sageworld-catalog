@@ -1,6 +1,3 @@
-# Usage:
-#
-
 module SageWorld
   module Api
     class SupplierList < SageWorld::Api::Base
