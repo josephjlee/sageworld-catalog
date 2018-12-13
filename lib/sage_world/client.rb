@@ -6,7 +6,7 @@ module SageWorld
     end
 
     def send_request
-      http.request(@request.build_request)
+      @request.make_request
     end
 
     private def http

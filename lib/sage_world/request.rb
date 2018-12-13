@@ -1,42 +1,38 @@
-require 'uri'
-require 'net/http'
-require 'gyoku'
+require 'faraday'
+require 'faraday_middleware'
 
 module SageWorld
   class Request
 
-    attr_reader :url, :request, :body, :host, :port
+    attr_reader :url, :connection
 
     def initialize(params)
       @params = params
-      @auth = SageWorld::Auth.new
+      @auth ||= SageWorld::Auth.new(params)
       @url ||= URI(SageWorld.configuration.end_point)
     end
 
-    def build_request
-      @request = Net::HTTP::Post.new(@url.request_uri)
-      @request.body = Gyoku.xml(xml_request_params, key_converter: lambda { |key| key.camelize(:upper) })
-      @request
+    private def make_connection
+      @connection ||= Faraday.new(@url) do |builder|
+
+        builder.response :xml, :content_type => /\bxml$/
+
+        builder.response :json, :content_type => /\bjson$/
+
+        builder.response :xml, :content_type => /\bhtml$/
+
+        builder.adapter Faraday.default_adapter
+      end
     end
 
-    def http
-      @http = Net::HTTP.new(host, port)
-      @http.use_ssl = true || SageWorld.configuration.use_ssl
-      @http
-    end
+    def make_request
+      @connection ||= make_connection
 
-    private def xml_request_params
-      body = @auth.body
-      body[:XML_data_stream_request].merge!(@params)
-      body
-    end
-
-    private def host
-      @url.host
-    end
-
-    private def port
-      @url.port
+      if @connection
+        @connection.post do |request|
+          request.body = @auth.to_xml
+        end
+      end
     end
 
   end

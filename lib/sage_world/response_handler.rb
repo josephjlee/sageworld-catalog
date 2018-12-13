@@ -1,6 +1,3 @@
-require 'nori'
-require 'nokogiri'
-
 module SageWorld
   class ResponseHandler
 
@@ -9,33 +6,18 @@ module SageWorld
     attr_reader :response, :data_hash
 
     def initialize(response)
+      validate_response(response)
       @response = response
     end
 
-    def code
-      @response.code
+    def body
+      @response.body.with_indifferent_access
     end
 
-    def message
-      @response.message
-    end
-
-    def error_message
-      @data_hash ||= as_hash
-      @data_hash.dig(SageWorld::Constants::ROOT_KEY, :err_msg)
-    end
-
-    def header
-      @response.header
-    end
-
-    def as_xml
-      Nokogiri::XML(@response.body)
-    end
-
-    def as_hash
-      parser = Nori.new(:convert_tags_to => lambda { |tag| tag.snakecase.to_sym })
-      @data_hash ||= parser.parse(@response.body)
+    private def validate_response(response)
+      if response.body['XMLDataStreamResponse'].key?('ErrMsg')
+        raise SageWorld::GeneralError.new(response.body['XMLDataStreamResponse']['ErrMsg'])
+      end
     end
 
   end

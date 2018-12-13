@@ -1,12 +1,25 @@
 module SageWorld
   class Auth
 
-    def initialize
+    attr_reader :request_body
+
+    def initialize(params)
       validate_configuration
       @login_id   = SageWorld.configuration.login
       @password   = SageWorld.configuration.password
       @version    = SageWorld.configuration.version
       @account_id = SageWorld.configuration.account_id
+      @params = params
+    end
+
+    def to_xml
+      if request_body
+        Gyoku.xml(request_body, key_converter: lambda { |key| key.camelize(:upper) })
+      end
+    end
+
+    def request_body
+      { XML_data_stream_request: body[:XML_data_stream_request].merge(@params) }
     end
 
     def body
