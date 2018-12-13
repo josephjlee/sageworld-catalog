@@ -22,7 +22,7 @@ module SageWorld
       { XML_data_stream_request: body[:XML_data_stream_request].merge(@params) }
     end
 
-    def body
+    private def body
       {
         XML_data_stream_request: {
           version: @version,
@@ -36,7 +36,27 @@ module SageWorld
     end
 
     private def validate_configuration
+      check_configuration_presence
+      check_end_point_presence
+      check_credentials_presence
+      check_account_presence
+    end
+
+    private def check_configuration_presence
       raise SageWorld::InvalidConfigurationError.new unless SageWorld.configuration.present?
+    end
+
+    private def check_end_point_presence
+      raise SageWorld::InvalidConfigurationError.new(SageWorld::Constants::END_POINT_MISSING_ERROR) unless SageWorld.configuration.end_point
+    end
+
+    private def check_credentials_presence
+      raise SageWorld::InvalidConfigurationError.new(SageWorld::Constants::INVALID_CREDENTIALS) unless SageWorld.configuration.login
+      raise SageWorld::InvalidConfigurationError.new(SageWorld::Constants::INVALID_CREDENTIALS) unless SageWorld.configuration.password
+    end
+
+    private def check_account_presence
+      raise SageWorld::InvalidConfigurationError.new(SageWorld::Constants::ACCOUNT_ID_MISSING_ERROR) unless SageWorld.configuration.account_id
     end
 
   end
