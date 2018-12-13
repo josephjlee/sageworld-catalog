@@ -1,11 +1,12 @@
 module SageWorld
   class Auth
 
-    def initialize(options= {})
-      @login_id   = SageWorld.configuration.login      || options[:login]
-      @password   = SageWorld.configuration.password   || password[:password]
-      @version    = SageWorld.configuration.version    || version[:version]
-      @account_id = SageWorld.configuration.account_id || acct_id[:version]
+    def initialize
+      validate_configuration
+      @login_id   = SageWorld.configuration.login
+      @password   = SageWorld.configuration.password
+      @version    = SageWorld.configuration.version
+      @account_id = SageWorld.configuration.account_id
     end
 
     def body
@@ -19,6 +20,10 @@ module SageWorld
           }
         }
       }
+    end
+
+    private def validate_configuration
+      raise SageWorld::InvalidConfigurationError.new unless SageWorld.configuration.present?
     end
 
   end
