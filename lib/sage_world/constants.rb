@@ -1,5 +1,6 @@
 module SageWorld
   module Constants
-    ROOT_KEY = :xml_data_stream_response
+    ROOT_KEY = 'XMLDataStreamResponse'
+    ERROR_KEY = 'ErrMsg'
   end
 end

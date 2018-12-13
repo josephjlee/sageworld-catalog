@@ -10,8 +10,7 @@ module SageWorld
       #
       # supplier = SageWorld::Api::Supplier.new("222")
       # response = supplier.details
-        # response.as_hash => details as hash
-        # response.as_xml => details as xml
+        # response.body => details as hash
       #
       #
       #  Options

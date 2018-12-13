@@ -19,8 +19,7 @@ module SageWorld
       # Usage:
       # product = SageWorld::Api::Product.new("Product_id_or_spc")
       # response = product.details
-      # response.as_hash => product details as hash
-      # response.as_xml => product details as xml
+      # response.body => product details as hash
 
       def details(options = {})
         if @existing_options == options
@@ -36,11 +35,10 @@ module SageWorld
       #
       # Usage:
       #
-      # Keyword for searching is necessary.
+      # Keyword for searching is mandatory.
       #
       # response = SageWorld::Api::Product.search("mug", { })
-      # response.as_xml => returns xml response.
-      # response.as_hash => returns hash response.
+      # response.body => returns hash response.
 
       # Searching Options
       # Basic searching can be combined with multiple options available to narrow down the searching scope.

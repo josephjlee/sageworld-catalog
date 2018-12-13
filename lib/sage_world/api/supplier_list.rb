@@ -5,8 +5,7 @@ module SageWorld
       # Example Usage:
       #
       # response = SageWorld::Api::SupplierList.get()
-        # response.as_hash => list as hash
-        # response.as_xml => list as xml
+        # response.body => list as hash
 
       #
       # Options

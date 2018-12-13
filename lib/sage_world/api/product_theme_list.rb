@@ -7,8 +7,7 @@ module SageWorld
     # response = SageWorld::Api::ProductThemeList.get => return SageWorld::ResponseHandler object.
 
     # On SageWorld::ResponseHandler object one can call following methods depending upon requirements.
-      # response.as_hash => returns the response in hash format.
-      # response.as_xml => returns the response in xml format.
+      # response.body => returns the response in hash format.
 
       def self.get(params = {})
         if @existing_params == params

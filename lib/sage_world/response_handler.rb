@@ -15,8 +15,8 @@ module SageWorld
     end
 
     private def validate_response(response)
-      if response.body['XMLDataStreamResponse'].key?('ErrMsg')
-        raise SageWorld::GeneralError.new(response.body['XMLDataStreamResponse']['ErrMsg'])
+      if response.body[SageWorld::Constants::ROOT_KEY].key?(SageWorld::Constants::ERROR_KEY)
+        raise SageWorld::GeneralError.new(response.body[SageWorld::Constants::ROOT_KEY][SageWorld::Constants::ERROR_KEY])
       end
     end
 
