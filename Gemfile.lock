@@ -4,7 +4,8 @@ PATH
     sage_world (0.1.0)
       faraday
       faraday_middleware
-      gyoku (~> 1.3.1)
+      gyoku (>= 1.3.1)
+      multi_xml
 
 GEM
   remote: https://rubygems.org/
@@ -17,6 +18,7 @@ GEM
       faraday (>= 0.7.4, < 1.0)
     gyoku (1.3.1)
       builder (>= 2.1.2)
+    multi_xml (0.6.0)
     multipart-post (2.0.0)
     rake (10.5.0)
     rspec (3.8.0)

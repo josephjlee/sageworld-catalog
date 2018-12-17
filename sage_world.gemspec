@@ -6,12 +6,12 @@ require "sage_world/version"
 Gem::Specification.new do |spec|
   spec.name          = "sage_world"
   spec.version       = SageWorld::VERSION
-  spec.authors       = ["Abhishek Kanojia"]
-  spec.email         = ["abhishek.kanojia@vinsol.com"]
+  spec.authors       = ["Abhishek Kanojia", "Vinsol Team"]
+  spec.email         = ["abhishek.kanojia@vinsol.com", "info@vinsol.com"]
 
-  spec.summary       = %q{Ruby Wrapper for SageWorld.}
-  spec.description   = %q{Ruby Wrapper for SageWorld.}
-  spec.homepage      = "https://github.com/abhikanojia/sageworld.git"
+  spec.summary       = %q{Ruby Wrapper for SageWorld catalog api.}
+  spec.description   = %q{Ruby Wrapper for SageWorld catalog.}
+  spec.homepage      = "https://github.com/vinsol/sageworld-catalog"
   spec.license       = "MIT"
 
   # Specify which files should be added to the gem when it is released.
@@ -29,5 +29,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'faraday'
   spec.add_dependency 'faraday_middleware'
-  spec.add_dependency 'gyoku', '~> 1.3.1'
+  spec.add_dependency 'multi_xml'
+  spec.add_dependency 'gyoku', '>= 1.3.1'
 end
