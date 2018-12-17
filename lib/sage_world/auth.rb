@@ -1,3 +1,5 @@
+require 'gyoku'
+
 module SageWorld
   class Auth
 
