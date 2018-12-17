@@ -21,6 +21,15 @@ module SageWorld
 
         builder.response :xml, :content_type => /\bhtml$/
 
+        # Enable logging if enabled
+        if SageWorld.configuration.log_data
+          builder.response :logger, ::Logger.new("#{Rails.root}/log/sage_world.log"), bodies: true do |logger|
+            logger.filter(/(\<LoginId\>)(\w+)/,'\1[REMOVED]')
+            logger.filter(/(\<Password\>)(\w+)/,'\1[REMOVED]')
+            logger.filter(/(\<AcctId\>)(\w+)/,'\1[REMOVED]')
+          end
+        end
+
         builder.adapter Faraday.default_adapter
       end
     end
