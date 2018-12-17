@@ -3,7 +3,7 @@ module SageWorld
 
     include SageWorld::Api::FindHelper
 
-    attr_reader :response, :data_hash
+    attr_reader :response
 
     def initialize(response)
       validate_response(response)
@@ -12,6 +12,11 @@ module SageWorld
 
     def body
       @response.body.with_indifferent_access
+    end
+
+    def method_missing(method_name)
+      key_name = method_name.to_s.camelize
+      find_in_hash(key_name)
     end
 
     private def validate_response(response)
