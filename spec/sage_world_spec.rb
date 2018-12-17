@@ -4,6 +4,6 @@ RSpec.describe SageWorld do
   end
 
   it 'has version equal to 0.0.1' do
-    expect(SageWorld::VERSION).to eq("0.1.0")
+    expect(SageWorld::VERSION).to eq("0.1.1")
   end
 end
