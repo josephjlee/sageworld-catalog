@@ -1,6 +1,6 @@
 # SageWorld
 
-SageWorld provides an easier way to use sageworld api in rails application.
+SageWorld provides an easier way to use sageworld api using ruby.
 https://www.sageworld.com/
 
 ## Installation
