@@ -1,6 +1,5 @@
 module SageWorld
   class ResponseHandler
-
     include SageWorld::Api::FindHelper
 
     attr_reader :response
