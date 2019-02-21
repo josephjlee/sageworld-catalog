@@ -9,7 +9,7 @@ require "sage_world/version"
 require "sage_world/api/base"
 require "sage_world/api/concerns/find_helper"
 
-Gem.find_files("sage_world/**/*.rb").each { |path| puts path; require_relative path }
+Gem.find_files("sage_world/**/*.rb").each { |path| require_relative path }
 
 require "sage_world/response_handler"
 
