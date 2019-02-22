@@ -165,6 +165,11 @@ module SageWorld
         SageWorld::ResponseHandler.new(response)
       end
 
+      def self.cached_data(supp_id, params={})
+        response = SageWorld::Client.new(cached_product_params(supp_id, params)).send_request
+        SageWorld::ResponseHandler.new(response)
+      end
+
       private def find_product_params(product_id, options)
         {
           product_detail: {
@@ -176,6 +181,16 @@ module SageWorld
       private_class_method def self.search_product_params(params)
         {
           search: params
+        }
+      end
+
+      private_class_method def self.cached_product_params(supp_id, params)
+        {
+          supplier_product_data_dump: {
+            supp_id: supp_id,
+            start_rec: params[:start_rec] || 1,
+            max_recs_to_return: params[:max_recs_to_return] || 0
+          }
         }
       end
 
