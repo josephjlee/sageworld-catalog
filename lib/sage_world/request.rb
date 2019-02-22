@@ -13,7 +13,7 @@ module SageWorld
     end
 
     private def make_connection
-      @connection ||= Faraday.new(@url) do |builder|
+      @connection ||= Faraday.new(@url, { request: { timeout: 3000 } }) do |builder|
 
         builder.response :xml, :content_type => /\bxml$/
 
